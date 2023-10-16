@@ -1,0 +1,4 @@
+DatabaseUrl="postgres://postgres:qwerty12345@localhost:5432/short_links"
+Domain="http://localhost:8080"
+Username="test"
+Password="test"
