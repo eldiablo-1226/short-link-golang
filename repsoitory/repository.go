@@ -2,15 +2,14 @@ package repsoitory
 
 import (
 	"context"
-	"github.com/jackc/pgx/v5"
+	"github.com/jackc/pgx/v5/pgxpool"
 )
 
-var connection *pgx.Conn
+var connection *pgxpool.Pool
 
 func Init(connectionString string) error {
 
-	conn, err := pgx.Connect(context.Background(), connectionString)
-
+	conn, err := pgxpool.New(context.Background(), connectionString)
 	if err != nil {
 		return err
 	}
@@ -21,7 +20,7 @@ func Init(connectionString string) error {
 }
 
 func Close() {
-	_ = connection.Close(context.Background())
+	connection.Close()
 }
 
 func GetCodeByUrl(url string) (string, error) {
